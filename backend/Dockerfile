@@ -5,7 +5,7 @@ WORKDIR /code
 COPY . .
 
 RUN pip install -r requirements.txt
-RUN python manage.py collectstatic
+RUN python manage.py collectstatic --noinput
 
 ENV PYTHONUNBUFFERED=1
 
