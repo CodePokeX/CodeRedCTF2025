@@ -11,19 +11,24 @@
   --primary: hsl(189, 92%, 58%);
 
   /* Theme colors */
-  --accent-color: #f97316;
-  --accent-glow: rgba(249, 115, 22, 0.4);
-  --accent-shadow: rgba(249, 115, 22, 0.2);
-  --accent-bg: rgba(249, 115, 22, 0.15);
-  --accent-hover: rgba(249, 115, 22, 0.1);
-  --accent-inset: rgba(249, 115, 22, 0.05);
+  --accent-color: #dc2a30;
+  --accent-glow: rgba(224, 25, 33, 0.4);
+  --accent-shadow: rgba(224, 25, 33, 0.2);
+  --accent-bg: rgba(224, 25, 33, 0.15);
+  --accent-hover: rgba(224, 25, 33, 0.1);
+  --accent-inset: rgba(224, 25, 33, 0.05);
 
   padding: 28px;
   padding-bottom: 10px;
   border-radius: 10px;
   font-family: "Orbitron", "Courier New", monospace;
   font-weight: 500;
-  background: linear-gradient(135deg, #171717 0%, #262626 50%, #1f1f1f 100%);
+  background: linear-gradient(
+    135deg,
+    #17171794 0%,
+    #26262689 50%,
+    #1f1f1f89 100%
+  );
   border: 1px solid #404040;
   /* border-left: 4px solid var(--accent-color); */
   cursor: pointer;
