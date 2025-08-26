@@ -12,7 +12,7 @@
 }
 
 .questions {
-  background-color: #0c0000;
+  background-color: #002357;
   padding: 4rem;
   min-height: calc(100vh - var(--footer-height) - var(--header-height));
 }
@@ -39,7 +39,7 @@
 
 .backButton {
   border-radius: 60px;
-  border: 18px solid black;
+  border: 18px solid #002357;
   background-color: white;
   color: black;
   padding: 20px 20px;
