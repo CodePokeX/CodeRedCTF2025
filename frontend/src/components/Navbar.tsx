@@ -21,7 +21,7 @@ export const Navbar = () => {
       zIndex: 1000,
     }}>
       <Link href="/">
-        <Image className="logo" src="/assets/images/logo.png" alt="Logo" width={230} height={100} />
+        <Image className="logo" src="/assets/images/logo.png" alt="Logo" width={160} height={40} />
       </Link>
       <button className="menu-toggle" onClick={toggleNavbar}>
         {isOpen ? <FaTimes /> : <FaBars />}
@@ -29,7 +29,7 @@ export const Navbar = () => {
       <nav className={isOpen ? 'nav-open' : ''}>
         <ul>
           <li><Link href="/" onClick={closeNavbar}>HOME</Link></li>
-          <li><Link href="/teams" onClick={closeNavbar}>tEAMS</Link></li>
+          <li><Link href="/teams" onClick={closeNavbar}>TEAMS</Link></li>
           <li><Link href="/question-map" onClick={closeNavbar}>QUESTIONS</Link></li>
           <li><Link href="/scoreboard" onClick={closeNavbar}>SCOREBOARD</Link></li>
         </ul>
