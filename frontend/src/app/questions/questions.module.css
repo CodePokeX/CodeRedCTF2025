@@ -33,8 +33,8 @@
 .backButtonContainer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 40px;
-  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Mission_Impossible_-_film_logo.svg/512px-Mission_Impossible_-_film_logo.svg.png");
 }
 
 .backButton {
