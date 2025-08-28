@@ -73,10 +73,9 @@ export default function Login() {
       for (let j = 0; j < charCount; j++) {
         const span = document.createElement('span')
 
-        // Insert glowing name characters inside the stream
         if (insertName && j >= insertIndex && j < insertIndex + name.length) {
           span.innerText = name[j - insertIndex]
-          span.classList.add(s.nameChar) // glowing style
+          span.classList.add(s.nameChar)
         } else {
           span.innerText = chars[Math.floor(Math.random() * chars.length)]
           span.style.setProperty('--angle', `${Math.random() * 60 - 30}deg`)
@@ -98,7 +97,7 @@ export default function Login() {
   /** Easter Egg Manager **/
   useEffect(() => {
     function triggerEasterEgg() {
-      if (activeEasterEgg.current) return // mutex
+      if (activeEasterEgg.current) return
 
       const eggs = ['rain', 'radar', 'circuit', 'crosshair', 'bgName']
       const chosen = eggs[Math.floor(Math.random() * eggs.length)]
@@ -184,8 +183,8 @@ export default function Login() {
     }
 
     const timer = setInterval(() => {
-      if (Math.random() < 1) triggerEasterEgg() // ~10% chance every 5s
-    }, 1000)
+      if (Math.random() < 0.1) triggerEasterEgg() // ~10% chance every 5s
+    }, 5000)
 
     return () => clearInterval(timer)
   }, [])
