@@ -32,7 +32,6 @@ export default function AdventureMap() {
     { id: 'island4', x: 4, y: 3 , image: '/island-4.png', href: '/questions/4'},
     { id: 'island5', x: 5, y: 1 , image: '/island-5.png', href: '/questions/5'},
     { id: 'island6', x: 6, y: 3 , image: '/island-6.png', href: '/questions/6'},
-    { id: 'island7', x: 7, y: 1 , image: '/island-7.png', href: '/questions/7'},
   ];
 
   const islandsMobile = [
@@ -42,7 +41,6 @@ export default function AdventureMap() {
     { id: 'island4', x: 1, y: 7 , image: '/island-4.png', href: '/questions/4'},
     { id: 'island5', x: 1, y: 9 , image: '/island-5.png', href: '/questions/5'},
     { id: 'island6', x: 1, y: 11 , image: '/island-6.png', href: '/questions/6'},
-    { id: 'island7', x: 1, y: 13 , image: '/island-7.png', href: '/questions/7'},
   ];
 
   const islandsTablet = [
@@ -52,7 +50,6 @@ export default function AdventureMap() {
     { id: 'island4', x: 2, y: 7 , image: '/island-4.png' , href: '/questions/4'},
     { id: 'island5', x: 1, y: 9 , image: '/island-5.png', href: '/questions/5'},
     { id: 'island6', x: 2, y: 11 , image: '/island-6.png', href: '/questions/6'},
-    { id: 'island7', x: 1, y: 13 , image: '/island-7.png', href: '/questions/7'},
   ];
 
   const islandsDesktop = [
@@ -62,7 +59,6 @@ export default function AdventureMap() {
     { id: 'island4', x: 2, y: 3 , image: '/island-4.png', href: '/questions/4'},
     { id: 'island5', x: 3, y: 1 , image: '/island-5.png', href: '/questions/5'},
     { id: 'island6', x: 3, y: 3 , image: '/island-6.png', href: '/questions/6'},
-    { id: 'island7', x: 4, y: 1 , image: '/island-7.png', href: '/questions/7'},
   ];
 
   const [islandsList, setIslandsList] = React.useState(islandsDesktop);
@@ -83,7 +79,7 @@ export default function AdventureMap() {
       }
       if (window.innerWidth >= 1440) {
         setIslandsList(islandsXL);
-        setMaxWidth('250px');
+        setMaxWidth('300px');
       }
     }
 
@@ -138,21 +134,6 @@ export default function AdventureMap() {
 
   return (
     <>
-      <div className={styles.mapTitle}>
-        <h1>Adventure Map</h1>
-        {/* Team Score */}
-        <div className={styles.teamScore}>
-          <h2>
-            Team Score:  
-            <span className={styles.score}>
-              {teamData ?
-                teamData.score
-                : 'Loading...'
-              }
-            </span>
-          </h2>
-        </div>
-      </div>
       <div className={styles.mapContainer}>
         {islandsList.map((island, key) => (
           <div
@@ -199,7 +180,6 @@ export default function AdventureMap() {
         <CustomConnection start="island3" end="island4" />
         <CustomConnection start="island4" end="island5" />
         <CustomConnection start="island5" end="island6" />
-        <CustomConnection start="island6" end="island7" />
       </div>
     </>
   );
