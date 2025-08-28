@@ -16,6 +16,8 @@ import { Sections } from "@/models/Team";
 import QuestionResponse from "@/models/Responses";
 
 export default function Page({ params }: { params: { slug: string } }) {
+
+
   const [cookies] = useCookies(["access_token"]);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [responses, setResponses] = useState<QuestionResponse[]>([]);
@@ -98,10 +100,38 @@ export default function Page({ params }: { params: { slug: string } }) {
     return notFound();
   }
 
+  const sectionsMeta = [
+    {
+      name: "Russian Resilience",
+      src: "https://static.vecteezy.com/system/resources/thumbnails/029/163/619/small_2x/russia-map-in-white-color-map-of-russia-in-administrative-regions-png.png",
+    },
+    {
+      name: "American Apocalypse",
+      src: "https://static.vecteezy.com/system/resources/thumbnails/023/264/311/small/usa-map-america-map-united-states-of-america-map-isolated-on-white-color-png.png",
+    },
+    {
+      name: "Chinese Catastrophe",
+      src: "https://static.vecteezy.com/system/resources/thumbnails/022/826/930/small_2x/china-map-on-white-color-png.png",
+    },
+    {
+      name: "Japanese Judgment",
+      src: "https://www.mappng.com/png-country-maps/2021-07-13574Japan-map-white.png",
+    },
+    {
+      name: "European Exodus",
+      src: "https://www.clker.com//cliparts/q/6/2/Y/A/K/european-map-blank-white-hi.png",
+    },
+    {
+      name: "Indian Infiltration",
+      src: "https://raw.githubusercontent.com/gist/iashris/1b806cb925dcdb05c1b3ae756d6c76cc/raw/b9a1642fe66ac0fdb84118dfb34663da7d1ed81e/india.svg",
+    },
+  ];
   const sectionNumber = parseInt(params.slug);
-  if (sectionNumber < 1 || sectionNumber > 7) {
+  if (sectionNumber < 1 || sectionNumber > sectionsMeta.length) {
     return notFound();
   }
+  const { name: sectionNameText, src: sectionImageSrc } =
+    sectionsMeta[sectionNumber - 1];
 
   return (
     <main className={styles.questions}>
@@ -116,13 +146,43 @@ export default function Page({ params }: { params: { slug: string } }) {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="feather feather-arrow-left"
+            className="feather-arrow-left feather"
           >
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
           </svg>
           Back to Adventure Map
         </a>
+        <div style={{ textAlign: "end" }}>
+          <img
+            src={sectionImageSrc}
+            alt=""
+            style={{
+              position: "absolute",
+              height: "600px",
+              top: "10%",
+              right: "20%",
+              opacity: "0.1",
+            }}
+          />
+          <img
+            src={
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Mission_Impossible_-_film_logo.svg/512px-Mission_Impossible_-_film_logo.svg.png"
+            }
+            alt={sectionNameText || "Mission Logo"}
+            style={{ height: "100px" }}
+          />
+          <p
+            style={{
+              fontSize: "40px",
+              fontStyle: "italic",
+              fontFamily: "sans-serif",
+              fontWeight: "600",
+            }}
+          >
+            {"Mission " + sectionNumber} :{sectionNameText.toUpperCase()}
+          </p>
+        </div>
       </div>
 
       <h1>{sectionsData?.[sectionNumber - 1]?.title}</h1>
