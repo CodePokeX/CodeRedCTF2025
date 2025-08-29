@@ -1,81 +1,146 @@
+/* Root Scoreboard Container */
 .scoreboard {
   text-align: center;
   color: #fff;
   padding: 20px;
   border-radius: 10px;
-  min-height: calc( 100vh - var(--footer-height) - var(--header-height));
-  background-color: #040110;
-
+  min-height: calc(100vh - var(--footer-height) - var(--header-height));
+  background: radial-gradient(circle at center, #0d0d0d, #000000 85%);
+  font-family: "Orbitron", "Arial Black", monospace;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
 }
+
+/* Animated scan-line overlay */
+.scoreboard::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 0, 0, 0.08) 0px,
+    rgba(255, 0, 0, 0.08) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  animation: scan 6s linear infinite;
+  pointer-events: none;
+}
+@keyframes scan {
+  from { background-position: 0 0; }
+  to   { background-position: 0 120px; }
+}
+
+/* Title with typewriter effect and glow */
+@keyframes typing { from { width: 0 } to { width: 100% } }
+@keyframes blink { 50% { border-color: transparent } }
+
 .title {
-  font-size: 46px;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #e50914;
+  font-size: 50px;
   font-weight: bold;
+  color: #e50914;
+  text-transform: uppercase;
+  animation: typing 2.5s steps(25, end), blink 0.7s step-end infinite;
+  text-shadow: 0 0 15px #e50914, 0 0 30px #ff1a1a, 0 0 50px #e50914;
+  margin-bottom: 20px;
 }
 
+/* Divider Line */
 .hr {
   border: none;
-  border-top: 2px solid #3498db;
+  border-top: 2px solid #e50914;
   margin: 20px auto;
-  width: 50%;
+  width: 60%;
+  box-shadow: 0 0 15px #e50914;
 }
 
+/* User Score */
 .userScore {
-  font-size: 30px;
+  font-size: 34px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #3498db;
+  color: #ff1a1a;
   position: relative;
+  text-shadow: 0 0 10px #e50914, 0 0 20px #ff1a1a;
 }
 
-@keyframes cursor-blink {
-  0%, 100% {
-    opacity: 0; /* Cursor is invisible at the start and end of animation */
-  }
-  50% {
-    opacity: 0.5; /* Cursor is visible halfway through animation */
-  }
-}
-
+/* Table */
 .scoreTable {
-  width: 70%;
+  width: 80%;
   margin: auto;
   border-collapse: collapse;
+  border: 2px solid #e50914;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.8);
+  overflow: hidden;
 }
 
 .scoreTable thead {
-  background-color: #3498db;
+  background: linear-gradient(90deg, #e50914, #b1060f);
   color: #fff;
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 2px;
 }
 
 .scoreTable th, .scoreTable td {
-  padding: 10px;
+  padding: 14px;
 }
 
 .tablebody {
-  background-color: #222;
+  background-color: #141414;
 }
 
 .scoreRow:nth-child(even) {
-  background-color: #2f2f2f;
+  background-color: #1f1f1f;
 }
 
+/* Hover + glitch effect on rows */
+@keyframes glitch {
+  0% { text-shadow: 2px 0 red; }
+  20% { text-shadow: -2px 0 red; }
+  40% { text-shadow: 2px 0 red; }
+  60% { text-shadow: -2px 0 red; }
+  80% { text-shadow: 2px 0 red; }
+  100% { text-shadow: none; }
+}
 .scoreRow {
-  transition: background-color 0.1s; /* Add a smooth transition effect */
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
-
 .scoreRow:hover {
-  background-color: #26265b; /* Deep blue color on row hover */
+  background-color: #4d0000;
+  transform: scale(1.03);
+  box-shadow: inset 0 0 15px #e50914, 0 0 20px rgba(229,9,20,0.5);
+  animation: glitch 0.3s linear;
 }
 
-
+/* Loading with pulse + flicker */
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+@keyframes flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
 .loading {
-  font-size: 24px;
-  color: #3498db;
+  font-size: 28px;
+  color: #e50914;
   font-weight: bold;
+  text-shadow: 0 0 12px #e50914, 0 0 25px #ff1a1a;
+  animation: pulse 1.2s infinite, flicker 3s infinite;
+  letter-spacing: 3px;
+  margin-top: 30px;
 }
 
+/* Padding Utility */
 .pd-top {
   padding-top: 20px;
 }
 
-/* Add any additional styles you need here */
