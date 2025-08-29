@@ -102,30 +102,32 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   const sectionsMeta = [
     {
-      name: "Russian Resilience",
-      src: "https://static.vecteezy.com/system/resources/thumbnails/029/163/619/small_2x/russia-map-in-white-color-map-of-russia-in-administrative-regions-png.png",
-    },
-    {
       name: "American Apocalypse",
       src: "https://static.vecteezy.com/system/resources/thumbnails/023/264/311/small/usa-map-america-map-united-states-of-america-map-isolated-on-white-color-png.png",
     },
     {
+      name: "Australian Aftermath",
+      src: "https://static.vecteezy.com/system/resources/thumbnails/022/935/977/small_2x/map-of-australia-white-color-map-png.png",
+    },
+    {
+      name: "Brazilian Breakout",
+      src: "https://static.vecteezy.com/system/resources/previews/027/223/444/non_2x/brazil-map-with-administrative-regions-latin-map-brazilian-map-png.png",
+    },
+    {
+      name: "Russian Resilience",
+      src: "https://static.vecteezy.com/system/resources/thumbnails/029/163/619/small_2x/russia-map-in-white-color-map-of-russia-in-administrative-regions-png.png",
+    },
+    {
+      name: "Algerian Annihilation",
+      src: "https://www.pngplay.com/wp-content/uploads/6/Africa-White-Map-Transparent-Background.png",
+    },
+
+    {
       name: "Chinese Catastrophe",
       src: "https://static.vecteezy.com/system/resources/thumbnails/022/826/930/small_2x/china-map-on-white-color-png.png",
     },
-    {
-      name: "Japanese Judgment",
-      src: "https://www.mappng.com/png-country-maps/2021-07-13574Japan-map-white.png",
-    },
-    {
-      name: "European Exodus",
-      src: "https://www.clker.com//cliparts/q/6/2/Y/A/K/european-map-blank-white-hi.png",
-    },
-    {
-      name: "Indian Infiltration",
-      src: "https://raw.githubusercontent.com/gist/iashris/1b806cb925dcdb05c1b3ae756d6c76cc/raw/b9a1642fe66ac0fdb84118dfb34663da7d1ed81e/india.svg",
-    },
   ];
+  
   const sectionNumber = parseInt(params.slug);
   if (sectionNumber < 1 || sectionNumber > sectionsMeta.length) {
     return notFound();
