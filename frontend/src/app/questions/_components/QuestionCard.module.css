@@ -1,47 +1,292 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300,400,500,600,700&display=swap");
+
 .card {
-    padding: 20px;
-    box-shadow: 0px 3px 5px 0px rgba(229, 9, 20, 0.34); /* Deadpool red shadow */
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #1B1B1B; /* Dark background */
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    color: #fff; /* White text for better contrast */
+  /* Default theme variables */
+  --white: hsl(0, 0%, 100%);
+  --black: hsl(240, 15%, 9%);
+  --paragraph: hsl(0, 0%, 83%);
+  --line: hsl(240, 9%, 17%);
+  --primary: hsl(189, 92%, 58%);
+
+  /* Theme colors */
+  --accent-color: #dc2a30;
+  --accent-glow: rgba(224, 25, 33, 0.4);
+  --accent-shadow: rgba(224, 25, 33, 0.2);
+  --accent-bg: rgba(224, 25, 33, 0.15);
+  --accent-hover: rgba(224, 25, 33, 0.1);
+  --accent-inset: rgba(224, 25, 33, 0.05);
+
+  padding: 28px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  font-family: "Orbitron", "Courier New", monospace;
+  font-weight: 500;
+  background: linear-gradient(
+    135deg,
+    #17171794 0%,
+    #26262689 50%,
+    #1f1f1f89 100%
+  );
+  border: 1px solid #404040;
+  /* border-left: 4px solid var(--accent-color); */
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #e5e5e5;
+  min-height: 340px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.1);
+
+  /* HUD style clip-path with top-right chipped corner */
+  clip-path: polygon(
+    0 0,
+    /* Top-left */ calc(100% - 40px) 0,
+    /* Top-right start */ 100% 40px,
+    /* Top-right chipped */ 100% 100%,
+    /* Bottom-right */ 0 100% /* Bottom-left */
+  );
+}
+
+/* Answered theme - green variant */
+.card.answered {
+  --accent-color: #22c55e;
+  --accent-glow: rgba(34, 197, 94, 0.4);
+  --accent-shadow: rgba(34, 197, 94, 0.2);
+  --accent-bg: rgba(34, 197, 94, 0.15);
+  --accent-hover: rgba(34, 197, 94, 0.1);
+  --accent-inset: rgba(34, 197, 94, 0.05);
+
+  border-color: #22c55e;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(34, 197, 94, 0.1);
+}
+
+/* Glowing border effect - match the clip-path */
+.card .card__border {
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  background-image: linear-gradient(
+    0deg,
+    hsl(0, 0%, 100%) -50%,
+    hsl(0, 0%, 40%) 100%
+  );
+  border-radius: 10px;
+
+  /* Match the clip-path for the glowing border */
+  clip-path: polygon(
+    0 0,
+    /* Top-left */ calc(100% - 40px) 0,
+    /* Top-right start */ 100% 40px,
+    /* Top-right chipped */ 100% 100%,
+    /* Bottom-right */ 0 100% /* Bottom-left */
+  );
+}
+
+.card .card__border::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  z-index: 200;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%), rotate(0deg);
+  transform-origin: left;
+  width: 200%;
+  height: 10rem;
+  background-image: linear-gradient(
+    0deg,
+    hsla(0, 0%, 100%, 0) 0%,
+    hsl(189, 100%, 50%) 40%,
+    hsl(189, 100%, 50%) 60%,
+    hsla(0, 0%, 40%, 0) 100%
+  );
+  animation: rotate 8s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-bg),
+    transparent
+  );
+  transition: left 0.5s;
+  border-radius: 10px;
+  z-index: 1;
+
+  /* Match the clip-path for the scanning effect */
+  clip-path: polygon(
+    0 0,
+    /* Top-left */ calc(100% - 30px) 0,
+    /* Top-right start */ 100% 30px,
+    /* Top-right chipped */ 100% 100%,
+    /* Bottom-right */ 0 100% /* Bottom-left */
+  );
+}
+
+.card:hover::before {
+  left: 100%;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 8px 8px 3px rgba(229, 9, 20, 0.45); /* Deeper red shadow on hover */
+  transform: translateY(-6px) scale(1.01);
+  border-color: var(--accent-color);
+  box-shadow: 0 8px 32px var(--accent-shadow), 0 0 40px var(--accent-hover),
+    inset 0 0 30px var(--accent-inset);
+}
+
+.description {
+  color: #a3a3a3;
+  width: 100%;
+  font-family: "Orbitron", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  text-shadow: 0 0 8px var(--accent-shadow);
+  position: relative;
+  z-index: 2;
 }
 
 .card h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    margin: auto;
-    text-align: center;
-    color: #E50914;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+  font-family: "Orbitron", "Courier New", monospace;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-align: left;
+  color: var(--accent-color);
+  text-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-shadow);
+  letter-spacing: 1.5px;
+  white-space: normal;
+  max-width: 100%;
+  position: relative;
+  line-height: 1.3;
+  z-index: 2;
+}
+
+.card h2::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-color), transparent);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 .card p {
-    font-size: 16px;
-    color: #CCCCCC; /* Light gray for better contrast */
-    text-align: center;
-    margin-bottom: 30px;
+  font-family: "Orbitron", "Courier New", monospace;
+  font-size: 15px;
+  font-weight: 400;
+  color: #d4d4d4;
+  text-align: center;
+  margin-bottom: 24px;
+  line-height: 1.6;
+  text-shadow: 0 0 6px var(--accent-shadow);
+  position: relative;
+  z-index: 2;
 }
 
 .card .points {
-    font-size: 18px;
-    font-weight: 900;
-    text-align: right;
-    margin-top: 20px;
-    color: #E50914; /* Deadpool red for points */
+  font-family: "Orbitron", "Courier New", monospace;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: right;
+  margin-top: 16px;
+  color: #000000;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  right: 0;
+  text-shadow: 0 0 8px var(--accent-glow), 0 0 16px var(--accent-shadow);
+  letter-spacing: 1px;
+  z-index: 2;
+  background: var(--accent-color);
+  padding: 20px 18px;
+  border-radius: 4px;
 }
 
-.card .points.answered {
-    color: #0FFF50; /* Bright green for answered points */
+/* Points styling now automatically uses the theme variables */
+.card .points {
+  color: #000000;
+  text-shadow: 0 0 8px var(--accent-glow), 0 0 16px var(--accent-shadow);
+  background: var(--accent-color);
+}
+
+.card .teamsSolved {
+  font-family: "Orbitron", "Courier New", monospace;
+  font-size: 18px;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 20px;
+  text-shadow: none;
+  position: relative;
+  z-index: 2;
+}
+
+.card .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #404040;
+  /* position: relative; */
+  z-index: 2;
+} /* position: relative;
+
+
+/* HUD corner accent - properly positioned on the top-right corner */
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    transparent 35%,
+    var(--accent-color) 35%,
+    var(--accent-color) 65%,
+    transparent 65%
+  );
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  border-radius: 0;
+  z-index: 2;
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+/* Remove all the complex elements */
+.card .edgeGlow,
+.card .cornerIndicator {
+  display: none;
 }

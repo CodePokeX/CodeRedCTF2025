@@ -1,14 +1,17 @@
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 300px);
-    justify-content: left;
-    gap: 20px;
-    /* padding: 20px; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  justify-content: left;
+  gap: 40px;
+  background: url("") no-repeat center;
+  object-fit: cover;
+  background-size: cover;
+  /* padding: 20px; */
 }
 
 @media (max-width: 768px) {
-    .grid {
-        grid-template-columns: repeat(auto-fit, 300px);
-        justify-content: center;
-    }
+  .grid {
+    grid-template-columns: repeat(auto-fit, 300px);
+    justify-content: center;
+  }
 }
