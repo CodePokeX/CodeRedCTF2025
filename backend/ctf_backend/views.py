@@ -163,26 +163,27 @@ class SectionViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(sections, many=True)
         return Response(serializer.data)
 
-class ScoreboardViewSet(viewsets.ModelViewSet):
-    queryset = Team.objects.all()
-    serializer_class = ScoreboardSerializer
+class ScoreboardViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
-    def create(self,request): # Basically to handle POST Requests
-        return Response("Nope",status=status.HTTP_404_NOT_FOUND)
+
     def list(self, request):
         user = request.user
-        teams = Team.objects.all()
-        scores = []
-        for team in teams:
-            scores.append({'team': team.name, 'score': team.score})
-            if len(scores) == 10:
-                break
-        if user.team in teams:
-            current_user_score = user.team.score
-        scores = sorted(scores, key=lambda x: x['score'], reverse=True)
-        top_10_scores = scores[:10]
-        serialized_data = ScoreboardSerializer({'top_10_scores': top_10_scores, 'current_user_score': current_user_score})
-        return Response(serialized_data.data)
+        # Get all teams and sort by score descending
+        top_teams = Team.objects.order_by('-score')[:10]
+
+        # Build the top 10 scores
+        top_10_scores = [{'team': t.name, 'score': t.score} for t in top_teams]
+
+        # Get current user's score
+        current_user_score = user.team.score
+
+        # Serialize and return
+        serializer = ScoreboardSerializer({
+            'top_10_scores': top_10_scores,
+            'current_user_score': current_user_score
+        })
+
+        return Response(serializer.data)
     
 class AttemptsViewSet(viewsets.ModelViewSet):
     queryset = Flagresponse.objects.all()
@@ -230,3 +231,4 @@ def verify_token(request):
 
     else:
         return JsonResponse({'message': 'Invalid request method'}, status=405)
+    
