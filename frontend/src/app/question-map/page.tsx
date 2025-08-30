@@ -4,6 +4,7 @@ import React from 'react';
 import Xarrow from 'react-xarrows';
 import Image from 'next/image';
 import styles from './adventure-map.module.css'
+import SvgMap from './map';
 import ENDPOINT from '@/helpers/endpoint';
 import Cookies from 'js-cookie';
 import { Sections, TeamDetailed } from '@/models/Team';
@@ -135,51 +136,7 @@ export default function AdventureMap() {
   return (
     <>
       <div className={styles.mapContainer}>
-        {islandsList.map((island, key) => (
-          <div
-            key={island.id}
-            id={island.id}
-            className={
-              (sectionsData?.[key]?.points_threshold ?? 0) <= (teamData?.score ?? 0) ? styles.island : styles.islandLocked
-            }
-            style={{
-              gridColumn: island.x,
-              gridRow: island.y,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              position: 'relative',
-            }}
-          >
-            <img src={island.image} alt={island.id} 
-              onClick={() => {
-                if ((sectionsData?.[key]?.points_threshold ?? 0) <= (teamData?.score ?? 0))
-                  window.location.href = island.href
-              }}
-                style={{ 
-                  maxWidth: maxWidth,
-                  cursor: ((sectionsData?.[key]?.points_threshold ?? 0) <= (teamData?.score ?? 0)) ? 'pointer' : 'not-allowed',
-                }}
-            />
-            {(sectionsData?.[key]?.points_threshold ?? 0) > (teamData?.score ?? 0) && (
-              <>
-              <div className={styles.lockOverlay}>
-                <img src='/lock.svg' alt="lock" className={styles.lockIcon} />
-                {/* x score required to unlock */}
-
-              </div>
-              <p className={styles.pointsOverlay}>
-                Unlocks at {sectionsData?.[key]?.points_threshold ?? ''}
-              </p>
-              </>
-            )}
-          </div>
-        ))}
-        <CustomConnection start="island1" end="island2" />
-        <CustomConnection start="island2" end="island3" />
-        <CustomConnection start="island3" end="island4" />
-        <CustomConnection start="island4" end="island5" />
-        <CustomConnection start="island5" end="island6" />
+        <SvgMap sectionsData={sectionsData} teamData={teamData}></SvgMap>
       </div>
     </>
   );
