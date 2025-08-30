@@ -20,31 +20,32 @@ export default function Home() {
   }, []);
 
   return (
-    <main className={s.home + ' ' + lexend.className}>
-      <Design />
-      <Suspense fallback={<Lottie animationData={loadingAnimation} loop={true} />}>
-        <div className={s.content}>
-          <h1 className={s.title}>IEEE Code-Red 2024</h1>
-          <p className={s.subtitle}>Get ready for action!</p>
-          {username && (
-            <h2 className={s.welcomeTeam}>
-              Welcome to the Code-Red, TEAM <span>{username}</span>!
-            </h2>
-          )}
-
-          <div className={s.buttons}>
-            {!username && (
-              <Link href="/login" className={s.button}>Login</Link>
-            )}
+    <div className='font-orbitron'>
+      <main className={s.home}>
+        <Suspense fallback={<Lottie animationData={loadingAnimation} loop={true} />}>
+          <div className={s.content}>
+            <h1 className={s.title}>IEEE Code-Red 2025</h1>
+            <p className={s.subtitle}>Your mission awaits!</p>
             {username && (
-              <>
-                <Link href="/question-map" className={s.button}>Questions</Link>
-                <Link href="/logout" className={s.button}>Logout</Link>
-              </>
+              <h2 className={s.welcomeTeam}>
+                Its a <span style={{ color: '#e50914' }}>Code-Red</span>, Team <span>{username}</span>!
+              </h2>
             )}
+
+            <div className={s.buttons}>
+              {!username && (
+                <Link href="/login" className={s.button}>Login</Link>
+              )}
+              {username && (
+                <>
+                  <Link href="/question-map" className={s.button}>Questions</Link>
+                  <Link href="/logout" className={s.button}>Logout</Link>
+                </>
+              )}
+            </div>
           </div>
-        </div>
-      </Suspense>
-    </main>
+        </Suspense>
+      </main>
+    </div>
   );
 }

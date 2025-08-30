@@ -39,7 +39,7 @@ const Design = () => {
                             },
                             repulse: {
                                 distance: 100,
-                                duration: 0.4,
+                                duration: 0.2,
                             },
                         },
                     },
@@ -69,19 +69,27 @@ const Design = () => {
                                 enable: true,
                                 area: 1000,
                             },
-                            value: 60, // More particles for a richer effect
+                            value: 50, // More particles for a richer effect
                         },
                         opacity: {
-                            value: 0.6, // More opaque particles
+                            value: 1, // More opaque particles
                         },
                         shape: {
-                            type: "polygon",
+                            // type: "polygon",
+                            // options: {
+                            //     sides: { count: 5 }, // Five-sided particles to resemble shuriken stars
+                            // },
+                            type: "image",
                             options: {
-                                sides: { count: 5 }, // Five-sided particles to resemble shuriken stars
+                                image: {
+                                    src: "/gun.svg", // Path to your SVG in the public directory
+                                    width: 100,
+                                    height: 100,
+                                },
                             },
                         },
                         size: {
-                            value: { min: 3, max: 6 }, // Larger particle size
+                            value: 18,
                         },
                     },
                     detectRetina: true,
