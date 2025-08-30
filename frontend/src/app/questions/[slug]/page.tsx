@@ -187,8 +187,8 @@ export default function Page({ params }: { params: { slug: string } }) {
         </div>
       </div>
 
-      <h1>{sectionsData?.[sectionNumber - 1]?.title}</h1>
-      <p>{sectionsData && sectionsData[sectionNumber - 1]?.description}</p>
+{/*       <h1>{sectionsData?.[sectionNumber - 1]?.title}</h1>
+      <p>{sectionsData && sectionsData[sectionNumber - 1]?.description}</p> */}
       <br />
       <br />
       <Suspense
