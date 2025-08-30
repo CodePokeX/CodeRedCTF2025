@@ -1,36 +1,41 @@
 "use client";
 
-import React, { Suspense, useEffect, useState } from 'react'
-import ENDPOINT from '@/helpers/endpoint'
-import styles from '../questions.module.css'
-import { notFound } from 'next/navigation'
-import dynamic from 'next/dynamic';
+import React, { Suspense, useEffect, useState } from "react";
+import ENDPOINT from "@/helpers/endpoint";
+import styles from "../questions.module.css";
+import { notFound } from "next/navigation";
+import dynamic from "next/dynamic";
 
-const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
-import loadingAnimation from '@/components/loading.json';
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+import loadingAnimation from "@/components/loading.json";
 
-import { useCookies } from 'react-cookie'
-import Question from '@/models/Question'
-import QuestionsGrid from '../_components/QuestionsGrid'
-import { Sections } from '@/models/Team';
-import QuestionResponse from '@/models/Responses';
+import { useCookies } from "react-cookie";
+import Question from "@/models/Question";
+import QuestionsGrid from "../_components/QuestionsGrid";
+import { Sections } from "@/models/Team";
+import QuestionResponse from "@/models/Responses";
 
 export default function Page({ params }: { params: { slug: string } }) {
-  const [cookies] = useCookies(['access_token'])
-  const [questions, setQuestions] = useState<Question[]>([])
-  const [responses, setResponses] = useState<QuestionResponse[]>([])
-  const [error, setError] = useState<string | null>(null)
+
+
+  const [cookies] = useCookies(["access_token"]);
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [responses, setResponses] = useState<QuestionResponse[]>([]);
+  const [error, setError] = useState<string | null>(null);
   const [sectionsData, setSectionsData] = useState<Sections[]>();
 
   const fetchData = async () => {
     try {
       const access_token = cookies.access_token;
-      const res = await fetch(`${ENDPOINT}/questions/?category=${params.slug}`, {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-        next: { revalidate: 0 }
-      });
+      const res = await fetch(
+        `${ENDPOINT}/questions/?category=${params.slug}`,
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+          next: { revalidate: 0 },
+        }
+      );
 
       if ([402, 403, 400].includes(res.status)) {
         setError(res.status.toString());
@@ -51,14 +56,14 @@ export default function Page({ params }: { params: { slug: string } }) {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
-        next: { revalidate: 0 }
+        next: { revalidate: 0 },
       });
 
       if (res.ok) {
         const data = await res.json();
         setSectionsData(data);
       } else {
-        console.error('Failed to fetch sections data');
+        console.error("Failed to fetch sections data");
       }
     } catch (err) {
       console.error(err);
@@ -71,20 +76,19 @@ export default function Page({ params }: { params: { slug: string } }) {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
-        next: { revalidate: 0 }
+        next: { revalidate: 0 },
       });
 
       if (res.ok) {
         const data = await res.json();
         setResponses(data);
       } else {
-        console.error('Failed to fetch attempts data');
+        console.error("Failed to fetch attempts data");
       }
     } catch (err) {
       console.error(err);
     }
   };
-
 
   useEffect(() => {
     fetchData();
@@ -96,28 +100,106 @@ export default function Page({ params }: { params: { slug: string } }) {
     return notFound();
   }
 
+  const sectionsMeta = [
+    {
+      name: "American Apocalypse",
+      src: "https://static.vecteezy.com/system/resources/thumbnails/023/264/311/small/usa-map-america-map-united-states-of-america-map-isolated-on-white-color-png.png",
+    },
+    {
+      name: "Australian Aftermath",
+      src: "https://static.vecteezy.com/system/resources/thumbnails/022/935/977/small_2x/map-of-australia-white-color-map-png.png",
+    },
+    {
+      name: "Brazilian Breakout",
+      src: "https://static.vecteezy.com/system/resources/previews/027/223/444/non_2x/brazil-map-with-administrative-regions-latin-map-brazilian-map-png.png",
+    },
+    {
+      name: "Russian Resilience",
+      src: "https://static.vecteezy.com/system/resources/thumbnails/029/163/619/small_2x/russia-map-in-white-color-map-of-russia-in-administrative-regions-png.png",
+    },
+    {
+      name: "Algerian Annihilation",
+      src: "https://www.pngplay.com/wp-content/uploads/6/Africa-White-Map-Transparent-Background.png",
+    },
+
+    {
+      name: "Chinese Catastrophe",
+      src: "https://static.vecteezy.com/system/resources/thumbnails/022/826/930/small_2x/china-map-on-white-color-png.png",
+    },
+  ];
+  
   const sectionNumber = parseInt(params.slug);
-  if (sectionNumber < 1 || sectionNumber > 7) {
+  if (sectionNumber < 1 || sectionNumber > sectionsMeta.length) {
     return notFound();
   }
+  const { name: sectionNameText, src: sectionImageSrc } =
+    sectionsMeta[sectionNumber - 1];
 
   return (
     <main className={styles.questions}>
       {/* back button to go to question-map */}
-      <a href="/question-map" className={styles.backButton}>
-        <svg xmlns="http://www.w3.org/2000/svg" height={'48px'} width={'48px'} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-arrow-left">
-          <line x1="19" y1="12" x2="5" y2="12"></line>
-          <polyline points="12 19 5 12 12 5"></polyline>
-        </svg>
-        Back to Adventure Map
-      </a>
+      <div className={styles.backButtonContainer}>
+        <a href="/question-map" className={styles.backButton}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather-arrow-left feather"
+          >
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Back to Adventure Map
+        </a>
+        <div style={{ textAlign: "end" }}>
+          <img
+            src={sectionImageSrc}
+            alt=""
+            style={{
+              position: "absolute",
+              height: "600px",
+              top: "10%",
+              right: "20%",
+              opacity: "0.1",
+            }}
+          />
+          <img
+            src={
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Mission_Impossible_-_film_logo.svg/512px-Mission_Impossible_-_film_logo.svg.png"
+            }
+            alt={sectionNameText || "Mission Logo"}
+            style={{ height: "100px" }}
+          />
+          <p
+            style={{
+              fontSize: "40px",
+              fontStyle: "italic",
+              fontFamily: "sans-serif",
+              fontWeight: "600",
+            }}
+          >
+            {"Mission " + sectionNumber} :{sectionNameText.toUpperCase()}
+          </p>
+        </div>
+      </div>
 
       <h1>{sectionsData?.[sectionNumber - 1]?.title}</h1>
       <p>{sectionsData && sectionsData[sectionNumber - 1]?.description}</p>
       <br />
       <br />
-      <Suspense fallback={<Lottie animationData={loadingAnimation} loop={true} />}>
-        <QuestionsGrid questions={questions} fetchData={fetchData} fetchResponses={fetchQuestionAttempts} responses={responses} />
+      <Suspense
+        fallback={<Lottie animationData={loadingAnimation} loop={true} />}
+      >
+        <QuestionsGrid
+          questions={questions}
+          fetchData={fetchData}
+          fetchResponses={fetchQuestionAttempts}
+          responses={responses}
+        />
       </Suspense>
     </main>
   );

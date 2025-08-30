@@ -1,14 +1,11 @@
 
 .mapContainer {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   position: relative;
-  padding: 20px;
+  /*padding: 20px;*/
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  background-image: url(/bg.jpg);
+  background-image: url(/bg.png);
   background-color: #000;
   min-height: calc(100vh - var(--footer-height) - var(--header-height));
   overflow: hidden;
@@ -19,6 +16,11 @@
   }
 }
 
+.mapSvg{
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
 .island {
   position: relative;
@@ -28,14 +30,10 @@
   height: fit-content !important;
   z-index: 100;
   transition: transform 0.3s ease-in-out, filter 0.9s ease-in-out;
-  filter: drop-shadow(0px 5px 10px rgba(247, 103, 103, 0.4)) /* Intense white glow */
-          drop-shadow(0px 00px 20px rgba(255, 255, 255, 0.5)); /* Softer white glow */
 }
 
 .island:hover {
   transform: translateY(-10px) scale(1.05);
-  filter: drop-shadow(0px 15px 30px rgba(255, 0, 0, 0.7)) /* Intense red glow */
-          drop-shadow(0px 20px 40px rgba(255, 0, 0, 0.5)); /* Softer red glow */
 }
 
 .islandLocked {
@@ -87,7 +85,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2A2A2A50; 
+  background-color: #010a4a; 
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);

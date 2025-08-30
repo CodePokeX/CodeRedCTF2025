@@ -1,32 +1,75 @@
 .heading {
-	/* padding: 20px; */
-	text-align: center;
-	font-size: 40px;
-	margin: 0 0 20px 0;
+  /* padding: 20px; */
+  text-align: center;
+  font-size: 40px;
+  margin: 0 0 20px 0;
 }
 
 .subheading {
-	padding: 25px 20px;
-	font-size: 25px;
-	/* margin-bottom: 15px; */
+  padding: 25px 20px;
+  font-size: 25px;
+  /* margin-bottom: 15px; */
 }
 
 .questions {
-	background-color: #0c0000;
-	padding: 4rem;
-	min-height: calc( 100vh - var(--footer-height) - var(--header-height));
+  background-color: #002357;
+  padding: 4rem;
+  min-height: calc(100vh - var(--footer-height) - var(--header-height));
 }
 
 .backButton {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-decoration: none;
-	color: #fff;
-	transition: color 0.3s;
-	margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+  margin-bottom: 3rem;
 }
 
 .backButton:hover {
-	color: #e50914;
+  color: #e50914;
+}
+.backButtonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.backButton {
+  border-radius: 60px;
+  border: 18px solid #002357;
+  background-color: white;
+  color: black;
+  padding: 20px 20px;
+  margin: 40px 40px 40px 40px;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.backButton:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.backButton:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.backButton svg {
+  height: 48px;
+  width: 48px;
+  transition: transform 0.3s ease;
+}
+
+.backButton:hover svg {
+  transform: translateX(-5px);
 }
