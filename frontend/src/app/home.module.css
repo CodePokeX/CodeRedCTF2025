@@ -7,8 +7,12 @@
   color: #ffffff;
   /* font-family: 'Comic Sans MS', sans-serif; Comic-style font */
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
     url('/tom.jpg'); /* Background image of Deadpool (add the image to your project) */
+  background-size: cover; /* Fill screen without stretching */
+  background-attachment: fixed; /* Parallax effect, less distortion */
+  image-rendering: crisp-edges; /* For pixel-art style clarity */
+  image-rendering: -webkit-optimize-contrast; /* Extra sharpness in WebKit */
   background-size: cover;
   background-position-x: center;
   background-position-y: 40%;
@@ -17,16 +21,18 @@
 
 .content {
   text-align: center;
-  background-color: rgba(0, 0, 0, 1);
-  padding: 35px 80px;
-  border-radius: 30px;
+  background-color: #050e37;
+  padding: 30px 50px;
+  border-radius: 20px;
   z-index: 100;
-  border: 7px solid #FFFFFF; /* Bright cyan solid border */
-  box-shadow: 0 0 40px 5px #F0F0F0; /* Glowing shadow */
+  border: 2px solid #FFFFFF; /* Bright cyan solid border */
+  box-shadow: 0 0 20px 2px #F0F0F0; /* Glowing shadow */
+  
   /* background-image: url('/phone.png'); */
   /* background-position: center;
   background-size: cover; */
 }
+
 
 .title {
   /* font-family: 'Rouge Hero', sans-serif; */
@@ -34,8 +40,10 @@
   font-size: 4rem;
   margin-bottom: 10px;
   position: relative;
-  color: #ed0400;
-  text-shadow: 3px 3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, -3px -3px 0 #000; /* Comic-style shadow */
+  color: #FFFFFF;
+  /* text-shadow: 3px 3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, -3px -3px 0 #000; Comic-style shadow */
+  text-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.4); /* Outer soft glow */
 }
 
 .title::after {
@@ -61,7 +69,7 @@
 .subtitle {
   font-size: 1.8rem;
   margin-bottom: 25px;
-  color: #3232be; /* Yellow subtitle, like Deadpool's belt buckle */
+  color: #ed0400; /* Yellow subtitle, like Deadpool's belt buckle */
   text-shadow: 2px 2px 0 #000;
   font-weight: 500;
   /* font-style: italic; */
@@ -72,9 +80,10 @@
   font-weight: 500;
   padding: 10px;
   border-radius: 8px;
-  background-color: #3232be; /* Deadpool red */
+  background-color: black; /* Deadpool red */
   color: #ffffff;
   text-shadow: 1px 1px 0 #000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   word-wrap: unset;
   margin-bottom: 25px;
 }
@@ -94,11 +103,11 @@
   display: inline-block;
   padding: 10px 30px;
   margin: 0 10px;
-  background-color: #ed0400; /* Deadpool red */
+  background-color: #ed0400c0; /* Deadpool red */
   color: #ffffff;
   text-decoration: none;
   border-radius: 15px;
-  font-weight: 400;
+  font-weight: 500;
   transition: background-color 0.1s;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
   border: 2px solid #000;
@@ -106,7 +115,7 @@
 }
 
 .button:hover {
-  background-color: #3232be; /* Darker red on hover */
+  background-color: black; /* Darker red on hover */
 }
 
 .logoutButton {

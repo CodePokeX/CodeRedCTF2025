@@ -143,7 +143,7 @@ export default function AdventureMap() {
         {/* Team Score */}
         <div className={styles.teamScore}>
           <h2>
-            Team Score:  
+            Team Score:   
             <span className={styles.score}>
               {teamData ?
                 teamData.score

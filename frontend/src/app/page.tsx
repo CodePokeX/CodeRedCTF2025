@@ -20,9 +20,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div className='font-oswald'>
+    <div className='font-orbitron'>
       <main className={s.home}>
-        <Design />
         <Suspense fallback={<Lottie animationData={loadingAnimation} loop={true} />}>
           <div className={s.content}>
             <h1 className={s.title}>IEEE Code-Red 2025</h1>
